@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    
+    <!-- START FAVICONS -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- END FAVICONS -->
+
+    <!-- ANIMATIONS -->
+    <link rel="stylesheet" href="/stylesheets/hover.css"/>
+    <link rel="stylesheet" href="/stylesheets/animate.css">
+
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/7df676a4f2.js"></script>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet"> 
+
+    <!-- JQUERY -->
+    <script src="/javascripts/jQuery.js"></script>
+
+    <!-- INFINITE SCROLL -->
+    <script src="/javascripts/infinitescroll.js"></script>
+    
+    <!-- USA TODAY NETWORK -->
+    <script async src='https://tag.simpli.fi/sifitag/83e38220-f9e9-0137-61aa-06659b33d47c'></script>
+
+    <!-- Global site tag - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141779652-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'UA-141779652-1');
+    </script>
+  </head>
+  
+  <body>
+    <!-- DESKTOP NAV START -->
+    <div class="nav-lg">
+      <div class="account-container">
+        <div class="account-user-container">
+          {{#if user}}
+            <div class="dropdown">
+              <a href="#" data-toggle="dropdown">Hi, {{user.first_name}} <i class="fas fa-caret-down"></i></a>
+
+              <div class="dropdown-menu account-dropdown">
+                {{#if user.cart.length}}
+                <a class="dropdown-item" href="/cart">Shopping Cart <i class="fas fa-shopping-cart"></i> <span class="badge badge-light">{{user.cart.length}}</span></a>
+                {{else}}
+                <a class="dropdown-item" href="/cart">Shopping Cart</a>
+                {{/if}}
+
+                <a class="dropdown-item" href="/orders">Your Orders</a>
+
+                {{#if user.admin}}
+                <a class="dropdown-item" href="/admin">Administration Panel</a>
+                {{/if}}
+
+                <a class="dropdown-item" href="/users/logout">Sign out</a>
+              </div>
+            </div>
+          {{else}}
+            <p><a href="/users/login">Sign In</a> or <a href="/users/register">Create Account</a></p>
+          {{/if}}
+        </div>
+      </div>
+
+      <!-- LOGO -->
+      <a href="/"><img src="/images/logo-large-noelpaseo.png" alt="The Fine Jewelry Bar"></a>
+
+      <ul class="nav justify-content-center">
+        <li class="hvr-underline-from-right"><a class="nav-link" href="/sale">SALE</a></li>
+        
+        <li class="dropdown">
+          <a class="nav-link dropdown-toggle hvr-underline-from-right" href="#" data-toggle="dropdown">SHOP</a>
+
+          <div class="dropdown-menu nav-lg-dropdown-menu">
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store">Shop Everything</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/designers">Shop Designers</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store/category/bracelet">Shop Bracelets</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store/category/earring">Shop Earrings</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store/category/necklace">Shop Necklaces</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store/category/pendant">Shop Pendants</a>
+            <a class="dropdown-item nav-lg-dropdown-item" href="/store/category/ring">Shop Rings</a>
+          </div>
+        </li>
+
+        <li class="hvr-underline-from-right"><a class="nav-link" href="/designers">DESIGNERS</a></li>
+
+        <li class="hvr-underline-from-right"><a class="nav-link" href="/events">EVENTS</a></li>
+
+        <li class="hvr-underline-from-right"><a class="nav-link" href="/about/contact">CONTACT</a></li>
+      </ul>
+    </div>
+    <!-- DESKTOP NAV END -->
+
+    <!-- MOBILE NAV START -->
+    <div class="nav-sm">
+      <div class="collapse" id="mobileNavigation">
+        <ul>
+          {{#if user}}
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown">Your Account</a>
+
+            <div class="dropdown-menu nav-sm-account-dropdown">
+              {{#if user.cart.length}}
+                <a class="dropdown-item nav-sm-account-dropdown-item" href="/cart">Shopping Cart <i class="fas fa-shopping-cart"></i> <span class="badge badge-light">{{user.cart.length}}</span></a>
+                {{else}}
+                <a class="dropdown-item nav-sm-account-dropdown-item" href="/cart">Shopping Cart</a>
+                {{/if}}
+
+              <a class="dropdown-item nav-sm-account-dropdown-item" href="/orders">Orders</a>
+
+              {{#if user.admin}}
+              <a class="dropdown-item nav-sm-account-dropdown-item" href="/admin">Administration Panel</a>
+              {{/if}}
+
+              <a class="dropdown-item nav-sm-account-dropdown-item" href="/users/logout">Sign out</a>
+            </div>
+          </li>
+          {{else}}
+          <li><a href="/users/login">Sign in</a></li>
+          <li><a href="/users/register">Create an account</a></li>
+          {{/if}}
+
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown">Shop</a>
+
+            <div class="dropdown-menu nav-sm-shop-dropdown">
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/sales">Shop Sales</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store">Shop Everything</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/designers">Shop Designers</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/category/bracelet">Shop Bracelets</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/category/earring">Shop Earrings</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/category/necklace">Shop Necklaces</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/category/pendant">Shop Pendants</a>
+              <a class="dropdown-item nav-sm-shop-dropdown-item" href="/store/category/ring">Shop Rings</a>
+            </div>
+          </li>
+
+          <li><a href="/designers">Designers</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/about/contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <nav class="nav-sm-bar">
+        <a href="#" data-toggle="collapse" data-target="#mobileNavigation" aria-controls="mobileNavigation" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars" style="color: white; font-size: 1.5rem; padding-top: 4px; padding-left: 8px;"></i>
+        </a>
+      </nav>
+
+      <a href="/"><img src="/images/logo-large-noelpaseo.png" alt="The Fine Jewelry Bar"></a>
+    </div>
+    <!-- MOBILE NAV END -->
+
+    <!-- Flash Messages -->
+    <!-- Info Flash -->
+    <div class="container" style="max-width: 1440px;">
+      {{#if messages.info}}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          
+          {{messages.info}}
+          
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {{/if}}
+
+      <!-- Success Flash -->
+      {{#if messages.success}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          
+          {{messages.success}}
+          
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {{/if}}
+
+      <!-- Error Flash -->
+      {{#if messages.error}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          
+          {{messages.error}}
+          
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {{/if}}
+    </div>
+
+    {{{body}}}
+
+    <!-- Footer -->
+    <footer class="layout-footer">
+      <h5 style="color: white!important; text-align: center; font-size: 1.25rem; letter-spacing: 10px">THE HOME OF FINE ARTISAN JEWELRY</h5>
+
+      <div class="container">
+        <hr style="border-top: 1px solid rgb(255, 97, 165);">
+
+        <div class="row">
+          <div class="col-sm my-auto">
+            <ul class="footer-ul">
+              <li><a href="/about/map">STORE MAP</a></li>
+              <li><a href="/about/contact">CONTACT</a></li>
+              <li><a href="/newsletter">NEWSLETTER</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm my-auto">
+            <ul class="footer-ul">
+              <li><a href="#">REPAIRS</a></li>
+              <li><a href="/legal#returns">RETURN/EXCHANGE POLICY</a></li>
+              <li><a href="/legal#privacy">TERMS & PRIVACY POLICY</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm my-auto">
+            <ul class="footer-ul">
+              <li><a href="/about/story">OUR STORY</a></li>
+              <li><a href="https://www.instagram.com/the.jewelry.bar/" target="_blank">INSTAGRAM</a></li>
+              <li><a href="https://www.facebook.com/thefinejewelrybar/" target="_blank">FACEBOOK</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <br>
+
+        <p id="footer-copyright">Copyright The Fine Jewelry Bar, 2019. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/javascripts/pace.js"></script>
+    <script src="/javascripts/helpers.js"></script>
+  </body>
+</html>

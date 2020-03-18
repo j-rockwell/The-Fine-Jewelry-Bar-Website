@@ -1,0 +1,123 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: #EC257C; font-size: 2.5rem;">New Option</h3>
+    <p class="lead" style="text-align: center; color: black!important;">Creating for '{{listing.name}}'</p>
+
+    <hr>
+
+    <form action="/admin/listings/{{listing._id}}/options/create" method="POST">
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Identifier" name="identifier" required>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Manufacturer SKU" name="sku" required>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="form-group">
+                    <select class="form-control" name="ordertype">
+                        <option value="0">READY TO SHIP</option>
+                        <option value="1">REQUESTABLE FROM VENDOR</option>
+                        <option value="2">SPECIAL ORDER</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Metal" name="metal">
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Gemstone" name="gemstone">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <select class="custom-select" size="5" id="sizes" name="sizes" multiple>
+                            {{#if (eq listing.type 'ring')}}
+                            <option value="5">5</option>
+                            <option value="5.5">5.5</option>
+                            <option value="6">6</option>
+                            <option value="6.5">6.5</option>
+                            <option value="7">7</option>
+                            <option value="7.5">7.5</option>
+                            <option value="8">8</option>
+                            <option value="8.5">8.5</option>
+                            <option value="9">9</option>
+                            {{/if}}
+
+                            {{#if (eq listing.type 'necklace')}}
+                            <option value="16">16</option>
+                            <option value="18">18</option>
+                            <option value="20">20</option>
+                            <option value="22">22</option>
+                            <option value="24">24</option>
+                            <option value="26">26</option>
+                            <option value="28">28</option>
+                            <option value="30">30</option>
+                            <option value="32">32</option>
+                            <option value="34">34</option>
+                            <option value="36">36</option>
+                            <option value="38">38</option>
+                            <option value="40">40</option>
+                            <option value="42">42</option>
+                            <option value="44">44</option>
+                            <option value="46">46</option>
+                            <option value="48">48</option>
+                            {{/if}}
+
+                            {{#if (eq listing.type 'bracelet')}}
+                            <option value="6.5">6.5</option>
+                            <option value="7">7</option>
+                            <option value="7.5">7.5</option>
+                            <option value="8">8</option>
+                            <option value="8.5">8.5</option>
+                            <option value="9">9</option>
+                            {{/if}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="number" step="any" placeholder="Cost" name="cost" required>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="number" step="any" placeholder="Retail" name="price" required>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="form-group">
+                    <input class="form-control" type="number" min="1" max="100" placeholder="Quantity" name="quantity" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm text-center">
+                <button type="submit" class="btn btn-secondary btn-lg">Create Option</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+<div class="container-main">
+    <div class="row">
+        <div class="col-sm-8">
+            {{#each items}}
+            <div class="row">
+                <div class="col-sm-4"><img src="/images/product/{{this.option._id}}.png" style="max-width: 100%;"></div>
+
+                <div class="col-sm-8 my-auto">
+                    <a href="/store/listing/{{this.listing._id}}/{{this.option_id}}" style="color: #EC257C!important; font-size: 1.5rem;">{{this.listing.name}}</a>
+                    
+                    {{#if this.size}}
+                    <p style="color: black!important;">Size: {{this.size}}</p>
+                    {{else}}
+                    <p style="color: black!important;">Size: N/A</p>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="col-sm-4">
+            <div class="order-details">
+                <p><b>Transaction ID:</b> {{order.transaction}}</p>
+
+                <p><b>Order Status:</b> 
+                    {{#if (eq order.status 0)}}
+                        <span class="badge badge-primary">Awaiting Approval</span>
+                    {{/if}}
+
+                    {{#if (eq order.status 1)}}
+                        <span class="badge badge-warning">Awaiting Shipment</span>
+                    {{/if}}
+
+                    {{#if (eq order.status 2)}}
+                        <span class="badge badge-success">Shipped</span>
+                    {{/if}}
+
+                    {{#if (eq order.status 3)}}
+                        <span class="badge badge-success">Completed</span>
+                    {{/if}}
+
+                    {{#if (eq order.status 4)}}
+                        <span class="badge badge-info">Awaiting Special Order</span>
+                    {{/if}}
+                </p>
+
+                {{#if order.shipping_tracking}}
+                <p><b>Shipping Tracking:</b> <a href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={{order.shipping_tracking}}" style="color: #EC257C;">{{order.shipping_tracking}}</a></p>
+                {{else}}
+                <p><b>Shipping Tracking:</b> N/A</p>
+                {{/if}}
+
+                <br>
+
+                <h5>Shipping Information</h5>
+                <p><b>First Name:</b> {{order.shipping_firstname}}</p>
+                <p><b>Last Name:</b> {{order.shipping_lastname}}</p>
+                <p><b>Address:</b> {{order.shipping_address}}</p>
+                <p><b>City:</b> {{order.shipping_city}}</p>
+                <p><b>State:</b> {{order.shipping_state}}</p>
+                <p><b>ZIP:</b> {{order.shipping_zip}}</p>
+
+                <br>
+
+                <h5>Contact Information</h5>
+                <p><b>First Name:</b> {{order.contact_firstname}}</p>
+                <p><b>Last Name:</b> {{order.contact_lastname}}</p>
+                <p><b>Email:</b> {{order.contact_email}}</p>
+
+                {{#if order.contact_phone}}
+                <p><b>Phone:</b> {{order.contact_phone}}</p>
+                {{/if}}
+
+                <br>
+
+                <h5>Billing Information</h5>
+                <p><b>Address:</b> {{order.bill_address}}</p>
+                <p><b>City:</b> {{order.bill_city}}</p>
+                <p><b>State:</b> {{order.bill_state}}</p>
+                <p><b>ZIP:</b> {{order.bill_zip}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>

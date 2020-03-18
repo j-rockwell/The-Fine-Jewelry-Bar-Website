@@ -1,0 +1,60 @@
+<div class="container-main">
+    <h4 class="display-4" style="text-align: center; font-size: 2.0rem; background: #EC257C; max-width: 100%; color: white; padding-top: 10px; padding-bottom: 10px;">Listings</h4>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Listings</li>
+        </ol>
+    </nav>
+
+    <p style="text-align: center; color: black!important;"><a href="/admin/listings/new" style="color: #EC257C; font-weight: bold;">Create a new single listing</a> or <a href="/admin/listings/new" style="color: #EC257C; font-weight: bold;">Upload a batch of new listings</a></p>
+
+    <hr>
+
+    {{#if listings}}
+    <ul class="list-unstyled">
+        {{#each listings}}
+        <li class="media" style="margin-bottom: 32px">
+            <a class="align-self-center mr-3" href="/store/listing/{{this._id}}"><img src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 64px;"></a>
+
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p style="color: black!important; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0; padding-bottom: 0;">{{this.designer}}</p>
+                        <p style="color: black!important; font-size: 1.0rem; margin-bottom: 0; padding-bottom: 0;">{{this.name}}</p>
+                        <p style="color: black!important; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0; padding-bottom: 0;">{{this.options.length}} options</p>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deleteConfirmationModal{{this._id}}">Delete</button>
+                        <a href="/admin/listings/{{this._id}}/edit"><button type="button" class="btn btn-outline-primary btn-sm float-right" style="margin-right: 10px;">Edit</button></a>
+                        <a href="/store/listing/{{this._id}}"><button type="button" class="btn btn-outline-primary btn-sm float-right" style="margin-right: 10px;">Page</button></a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteConfirmationModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModal{{this._id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5 style="text-align: center;">Are you sure you want to delete {{this.name}}?</h5>
+                        
+                        <div class="row">
+                            <div class="col self-aligned-center"><img style="max-width: 100%;" src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';"></div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="/admin/listings/{{this._id}}/delete" method="POST"><button type="submit" class="btn btn-danger">Yes, I am sure</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>

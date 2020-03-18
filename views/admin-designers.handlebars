@@ -1,0 +1,33 @@
+<div class="container-main">
+    <h4 class="display-4" style="text-align: center; font-size: 2.0rem; background: #EC257C; max-width: 100%; color: white; padding-top: 10px; padding-bottom: 10px;">Designers</h4>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Designers</li>
+        </ol>
+    </nav>
+    
+    {{#if designers}}
+        {{#each designers}}
+            <form action="/admin/designers/{{this.name}}/delete" method="POST">
+                <div class="admin-designer-list">
+                    <div class="admin-designer-list-item">
+                        <h5>{{this.name}} <button type="submit" class="btn btn-outline-danger float-right btn-sm">Delete</button> <a href="/store/designer/{{this.name}}"><button type="button" class="btn btn-outline-primary float-right btn-sm" style="margin-right: 10px;">View Store</button></a></h5>
+                    </div>
+                </div>
+            </form>
+        {{/each}}
+    {{else}}
+        <h5>No designers found.</h5>
+    {{/if}}
+
+    <br><hr><br>
+
+    <h3>Add Designer</h3>
+    <form action="/admin/designers/create" method="POST">
+        <div class="form-group">
+            <input type="text" class="form-control mb-2" id="name" name="name" placeholder="Enter designer name and press enter">
+        </div>
+    </form>
+</div>

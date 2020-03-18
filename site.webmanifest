@@ -1,0 +1,8 @@
+{
+    "name": "The Fine Jewelry Bar",
+    "short_name": "The JBAR",
+    "icons": [],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

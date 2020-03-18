@@ -1,0 +1,73 @@
+<div class="container-main">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/users" style="color: #EC257C;">Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{result.first_name}} {{result.last_name}}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-4 my-auto">
+            <h1 style="text-align: center;">{{result.first_name}} {{result.last_name}}</h1>
+        </div>
+
+        <div class="col-sm-6 my-auto">
+            <a href="mailto:{{result.email}}" style="color: #EC257C;">{{result.email}}</a>
+            <p style="color: black!important; margin-top: 2px; margin-bottom: 2px;">Newsletter: {{result.newsletter}}</p>
+            <p style="color: black!important; margin-top: 2px; margin-bottom: 2px;">Administrator: {{result.admin}}</p>
+            <p style="color: black!important; margin-top: 2px; margin-bottom: 2px;">Created: {{result.date_created}}</p>
+        </div>
+    </div>
+
+    <h5 style="margin: 0; padding: 0; margin-top: 48px;">ORDER HISTORY</h5>
+    <hr style="margin: 0; padding: 0; margin-top: 8px;">
+
+    {{#if orders}}
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{this.transaction}}</td>
+
+                <td>
+                    {{#if (eq this.status 0)}}
+                        <span class="badge badge-primary">Awaiting Approval</span>
+                    {{/if}}
+
+                    {{#if (eq this.status 1)}}
+                        <span class="badge badge-warning">Awaiting Shipment</span>
+                    {{/if}}
+
+                    {{#if (eq this.status 2)}}
+                        <span class="badge badge-success">Shipped</span>
+                    {{/if}}
+
+                    {{#if (eq this.status 3)}}
+                        <span class="badge badge-success">Completed</span>
+                    {{/if}}
+
+                    {{#if (eq this.status 4)}}
+                        <span class="badge badge-info">Awaiting Special Order</span>
+                    {{/if}}
+                </td>
+
+                <td>{{this.date}}</td>
+
+                <td><a href="/orders/{{this._id}}" style="color: #EC257C!important;">View</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p style="color: black!important; text-align: center; margin-top: 8px;">This user has not placed an order before</p>
+    {{/if}}
+</div>

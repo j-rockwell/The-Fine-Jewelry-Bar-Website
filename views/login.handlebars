@@ -1,0 +1,32 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: black; font-size: 2.5rem; margin-bottom: 32px;">Sign in</h3>
+
+    <div class="row">
+        <div class="col"></div>
+
+        <div class="col-8">
+
+            <form action="/users/login" method="POST">
+                <div class="form-group">
+                    <label for="inputEmail">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                </div>
+
+                <br>
+
+                <button type="submit" name="loginButton" value="login" class="btn btn-secondary btn-sm btn-block" style="display: block; margin: 0 auto; max-width: 120px;">Sign in</button>
+            </form>
+        </div>
+
+        <div class="col"></div>
+    </div>
+
+    <br>
+
+    <h5 style="text-align: center; margin-bottom: 12px;">Don't have an account? <a href="/users/register/" style="color: #EC257C;">Click here to create one</a></h5>
+</div>

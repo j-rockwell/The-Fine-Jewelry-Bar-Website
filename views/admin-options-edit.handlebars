@@ -1,0 +1,177 @@
+<div class="container-main">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/listings" style="color: #EC257C;">Listings</a></li>
+            <li class="breadcrumb-item"><a href="/admin/listings/{{listing._id}}/edit" style="color: #EC257C;">Editing {{listing.name}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editing Option {{option.identifier}}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm">
+            <a href="/store/listing/{{listing._id}}/{{option._id}}"><img class="img-fluid" src="/images/product/{{option._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 100%; margin-bottom: 10px;"></a>
+
+            <form action="/admin/listings/{{listing._id}}/options/{{option._id}}/image/update" method="POST" encType="multipart/form-data">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="optionImageUpload" name="optionImageUpload">
+                        <label class="custom-file-label" for="optionImageUpload" aria-describedby="optionImageUpload" accept="image/x-png">Upload Cover</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Upload</button>
+            </form>
+        </div>
+
+        <div class="col-sm">
+            <h3 class="display-4" style="text-align: center; color: black; font-size: 2.5rem;">Editing {{listing.name}}</h3>
+
+            <hr>
+
+            <form action="/admin/listings/{{listing._id}}/options/{{option._id}}/update" method="POST">
+                <div class="form-group">
+                    <label for="id">Unique ID</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="{{option._id}}">
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="identifier">Identifier</label>
+                            <input type="text" class="form-control" id="identifier" name="identifier" value="{{option.identifier}}">
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="sku">Manufacturer SKU</label>
+                            <input type="text" class="form-control" id="sku" name="sku" value="{{option.sku}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="orderType">Order Type</label>
+                            <select class="form-control" name="orderType" id="orderType">
+                                <option value="0">Ready to Ship</option>
+                                <option value="1">Requestable from Vendor</option>
+                                <option value="2">Special Order</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="metal">Metal</label>
+                            <input type="text" class="form-control" id="metal" name="metal" value="{{option.metal}}">
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="gemstone">Gemstone</label>
+                            <input type="text" class="form-control" id="gemstone" name="gemstone" value="{{option.gemstone}}">
+                        </div>
+                    </div>
+                </div>
+
+                
+                {{#if (eq listing.type 'ring')}}
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="size">Sizes (Hold CTRL to select multiple)</label>
+                        <div class="form-group">
+                            <select class="custom-select" size="5" id="size" name="size" multiple>
+                                <option value="5">5</option>
+                                <option value="5.5">5.5</option>
+                                <option value="6">6</option>
+                                <option value="6.5">6.5</option>
+                                <option value="7">7</option>
+                                <option value="7.5">7.5</option>
+                                <option value="8">8</option>
+                                <option value="8.5">8.5</option>
+                                <option value="9">9</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if (eq listing.type 'necklace')}}
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="size">Length (Hold CTRL to select multiple)</label>
+                        <div class="form-group">
+                            <select class="custom-select" size="5" id="size" name="size" multiple>
+                                <option value="16">16</option>
+                                <option value="18">18</option>
+                                <option value="20">20</option>
+                                <option value="22">22</option>
+                                <option value="24">24</option>
+                                <option value="26">26</option>
+                                <option value="28">28</option>
+                                <option value="30">30</option>
+                                <option value="32">32</option>
+                                <option value="34">34</option>
+                                <option value="36">36</option>
+                                <option value="38">38</option>
+                                <option value="40">40</option>
+                                <option value="42">42</option>
+                                <option value="44">44</option>
+                                <option value="46">46</option>
+                                <option value="48">48</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if (eq listing.type 'bracelet')}}
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="size">Size (Hold CTRL to select multiple)</label>
+                        <div class="form-group">
+                            <select class="custom-select" size="5" id="size" name="size" multiple>
+                                <option value="6.5">6.5</option>
+                                <option value="7">7</option>
+                                <option value="7.5">7.5</option>
+                                <option value="8">8</option>
+                                <option value="8.5">8.5</option>
+                                <option value="9">9</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="cost">Cost</label>
+                        <input type="number" class="form-control" id="cost" name="cost" value="{{option.cost}}">
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" value="{{option.price}}">
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{option.quantity}}">
+                    </div>
+                </div>
+
+                <br>
+
+                <button type="submit" class="btn btn-outline-secondary btn-sm btn-block" style="margin-bottom: 8px;">Update</button>
+            </form>
+
+            <a href="/admin/listings/{{listing._id}}/options/{{option._id}}/sizes/new"><button type="button" class="btn btn-outline-secondary btn-sm btn-block" style="margin-bottom: 8px;">Create a new size</button></a>
+            <a href="/admin/listings/{{listing._id}}/edit"><button type="button" class="btn btn-outline-secondary btn-sm btn-block" style="margin-bottom: 8px;">Return to listing</button></a>
+            <form action="/listings/{{listing._id}}/options/{{option._id}}/delete" method="POST"><button type="button" class="btn btn-outline-danger btn-sm btn-block">Delete Option</button></form>
+        </div>
+    </div>
+</div>

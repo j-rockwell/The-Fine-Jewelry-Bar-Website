@@ -1,0 +1,133 @@
+<div class="container-main">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item"><a href="/admin/listings" style="color: #EC257C;">Listings</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editing {{listing.name}}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm">
+            <a href="/store/listing/{{listing._id}}"><img class="img-fluid" src="/images/product/{{listing._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 100%; margin-bottom: 10px;"></a>
+
+            <form action="/admin/listings/{{listing._id}}/image/update" method="POST" encType="multipart/form-data">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="mainImageUpload" name="mainImageUpload">
+                        <label class="custom-file-label" for="mainImageUpload" aria-describedby="mainImageUpload" accept="image/x-png">Upload Cover</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Upload</button>
+            </form>
+        </div>
+
+        <div class="col-sm">
+            <form action="/admin/listings/{{listing._id}}/update" method="POST">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="{{listing._id}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{listing.name}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="collection">Collection</label>
+                    <input type="text" class="form-control" id="collection" name="collection" value="{{listing.coll}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Item Description</label>
+                    <textarea type="text" class="form-control" id="description" name="description">{{listing.description}}</textarea>
+                </div>    
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="featured">Featured</label>
+                            <select class="form-control" id="featured" name="featured">
+                                {{#if listing.featured}}
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                {{else}}
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                                {{/if}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="priority">Listing Priority</label>
+                            {{#if listing.priority}}
+                            <input type="number" min="1" max="1000" value="{{listing.priority}}" class="form-control" id="priority" name="priority">
+                            {{else}}
+                            <input type="number" min="1" max="1000" value="1000" class="form-control" id="priority" name="priority">
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-secondary btn-sm btn-block" style="margin-bottom: 8px;">Update</button>
+            </form>
+
+            <a href="/admin/listings/{{listing._id}}/options/new"><button type="button" class="btn btn-outline-secondary btn-sm btn-block" style="margin-bottom: 8px;">Create a new option</button></a>
+            <form action="/admin/listings/{{listing._id}}/delete" method="POST"><button type="button" class="btn btn-outline-danger btn-sm btn-block">Delete Listing</button></form>
+        </div>
+    </div>
+
+    <hr>
+
+    <h5>Options</h5>
+
+    {{#if listing.options.length}}
+    <ul class="list-unstyled">
+        {{#each listing.options}}
+        <li class="media" style="margin-bottom: 32px">
+            <a class="align-self-center mr-3" href="/store/listing/{{@root.listing._id}}/{{this._id}}"><img src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 64px;"></a>
+
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p style="color: black!important; font-size: 1.0rem; margin-bottom: 0; padding-bottom: 0;">ID: {{this.identifier}}, SKU: {{this.sku}}, Order Type: {{this.orderType}}, Metal: {{this.metal}}, Gemstone: {{this.gemstone}}, Size: {{this.size}}, Cost: ${{this.cost}}, Price: ${{this.price}}, Quantity: {{this.quantity}}</p>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deleteConfirmationModal{{this._id}}">Delete</button>
+                        <a href="/admin/listings/{{@root.listing._id}}/options/{{this._id}}/edit"><button type="button" class="btn btn-outline-primary btn-sm float-right" style="margin-right: 10px;">Edit</button></a>
+                        <a href="/store/listing/{{@root.listing._id}}/{{this._id}}"><button type="button" class="btn btn-outline-primary btn-sm float-right" style="margin-right: 10px;">Page</button></a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+         <!-- Modal -->
+        <div class="modal fade" id="deleteConfirmationModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModal{{this._id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5 style="text-align: center;">Are you sure you want to delete {{this.identifier}}?</h5>
+                        
+                        <div class="row">
+                            <div class="col self-aligned-center"><img style="max-width: 100%;" src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';"></div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="/admin/listings/{{@root.listing._id}}/options/{{this._id}}/delete" method="POST"><button type="submit" class="btn btn-danger">Yes, I am sure</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p style="color: black!important; margin-bottom: 12px;">No options found</p>
+    {{/if}}
+</div>

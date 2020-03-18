@@ -1,0 +1,381 @@
+<div class="container-main">
+    {{#if designer}}
+        <img src="/images/store-banners/{{designer}}.png" style="width: 100%; margin-bottom: 12px;">
+        <h3 class="display-4" style="text-align: center; color: #EC257C; font-size: 2.5rem; margin-bottom: 12px;">Shop {{designer}}</h3>
+    {{else if category}}
+        <h3 class="display-4" style="text-align: center; color: #EC257C; font-size: 2.5rem; margin-bottom: 12px;">Shop {{category}}s</h3>
+    {{/if}}
+
+    {{#if listings}}
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f4f4f4;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {{#unless category}}
+                    <li class="nav-item dropdown" style="margin-right: 16px;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                            CATEGORY
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!-- BRACELETS -->
+                            {{#if (cont 'bracelet' selected.categories)}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeCategory('bracelet')">Bracelets</a>
+                            {{else}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addCategory('bracelet')">Bracelets</a>
+                            {{/if}}
+
+                            <!-- EARRINGS -->
+                            {{#if (cont 'earring' selected.categories)}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeCategory('earring')">Earrings</a>
+                            {{else}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addCategory('earring')">Earrings</a>
+                            {{/if}}
+
+                            <!-- NECKLACES -->
+                            {{#if (cont 'necklace' selected.categories)}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeCategory('necklace')">Necklaces</a>
+                            {{else}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addCategory('necklace')">Necklaces</a>
+                            {{/if}}
+
+                            <!-- PENDANT -->
+                            {{#if (cont 'pendant' selected.categories)}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeCategory('pendant')">Prendants</a>
+                            {{else}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addCategory('pendant')">Prendants</a>
+                            {{/if}}
+
+                            <!-- RINGS -->
+                            {{#if (cont 'ring' @root.selected.categories)}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeCategory('ring')">Rings</a>
+                            {{else}}
+                                <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addCategory('ring')">Rings</a>
+                            {{/if}}
+                        </div>
+                    </li>
+                {{/unless}}
+
+                {{#unless designer}}
+                    <div class="d-none d-lg-block">
+                        <li class="nav-item dropdown"style="margin-right: 16px;">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                                DESIGNER
+                            </a>
+
+                            <div class="dropdown-menu dropdown-multicol" aria-labelledby="navbarDropdown">
+                                {{#grouped_each 3 designers}}
+                                    <div class="dropdown-row">
+                                        {{#each this}}
+                                            {{#if (cont name @root.selected.designers)}}
+                                                <a class="dropdown-item" href="#" style="color: #EC257C!important; font-size: 0.8rem;" onclick="removeDesigner('{{name}}')">{{name}}</a>
+                                            {{else}}
+                                                <a class="dropdown-item" href="#" style="font-size: 0.8rem;" onclick="addDesigner('{{name}}')">{{name}}</a>
+                                            {{/if}}
+                                        {{/each}}
+                                    </div>
+                                {{/grouped_each}}
+                            </div>
+                        </li>
+                    </div>
+
+                    <div class="d-lg-none">
+                        <li class="nav-item dropdown" style="margin-right: 16px;">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                                DESIGNER
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{#each designers}}
+                                    {{#if (cont name @root.selected.designers)}}
+                                        <a class="dropdown-item" href="#" style="color: #EC257C!important; font-size: 0.8rem" onclick="removeDesigner('{{name}}')">{{this.name}}</a>
+                                    {{else}}
+                                        <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addDesigner('{{name}}')">{{this.name}}</a>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                        </li>
+                    </div>
+                {{/unless}}
+                
+
+                <li class="nav-item dropdown" style="margin-right: 16px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                        PRICE
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{#if (cont '500' selected.prices)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removePriceRange('500')">Less than $500</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addPriceRange('500')">Less than $500</a>
+                        {{/if}}
+
+                        {{#if (cont '500-1000' selected.prices)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removePriceRange('500-1000')">$500-$1,000</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addPriceRange('500-1000')">$500-$1,000</a>
+                        {{/if}}
+
+                        {{#if (cont '1000-2500' selected.prices)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removePriceRange('1000-2500')">$1,000-$2,500</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addPriceRange('1000-2500')">$1,000-$2,500</a>
+                        {{/if}}
+
+                        {{#if (cont '2500-5000' selected.prices)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removePriceRange('2500-5000')">$2,500-$5,000</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addPriceRange('2500-5000')">$2,500-$5,000</a>
+                        {{/if}}
+
+                        {{#if (cont '5000' selected.prices)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removePriceRange('5000')">Greater than $5,000</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addPriceRange('5000')">Greater than $5,000</a>
+                        {{/if}}
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown" style="margin-right: 16px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                        MATERIAL
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{#if (cont 'Yellow Gold' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('Yellow Gold')">Yellow Gold</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('Yellow Gold')">Yellow Gold</a>
+                        {{/if}}
+
+                        {{#if (cont 'White Gold' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('White Gold')">White Gold</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('White Gold')">White Gold</a>
+                        {{/if}}
+                        
+                        {{#if (cont 'Rose Gold' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('Rose Gold')">Rose Gold</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('Rose Gold')">Rose Gold</a>
+                        {{/if}}
+
+                        {{#if (cont 'Silver' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('Silver')">Silver</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('Silver')">Silver</a>
+                        {{/if}}
+
+                        {{#if (cont 'Sterling Silver' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('Sterling Silver')">Sterling Silver</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('Sterling Silver')">Sterling Silver</a>
+                        {{/if}}
+
+                        {{#if (cont 'Mixed Metals' selected.materials)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C;" onclick="removeMaterial('Mixed Metals')">Mixed Metals</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="addMaterial('Mixed Metals')">Mixed Metals</a>
+                        {{/if}}
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown" style="margin-right: 16px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black!important; font-size: 0.8rem;">
+                        SORT BY
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{#if (eq 'lowest' selected.sort)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C" onclick="removeSort('lowest')">Price (Low-High)</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="applySort('lowest')">Price (Low-High)</a>
+                        {{/if}}
+
+                        {{#if (eq 'highest' selected.sort)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C" onclick="removeSort('highest')">Price (High-Low)</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="applySort('highest')">Price (High-Low)</a>
+                        {{/if}}
+
+                        {{#if (eq 'designer' selected.sort)}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem; color: #EC257C" onclick="removeSort('designer')">Designer</a>
+                        {{else}}
+                            <a class="dropdown-item" href="#" style="font-size: 0.8rem" onclick="applySort('designer')">Designer</a>
+                        {{/if}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {{#if selected.designers}}
+        {{#each selected.designers}}
+            <a href="#" class="badge badge-secondary" onclick="removeDesigner('{{this}}')" style="margin-top: 16px; margin-bottom: 8px; padding: 10px; color: white!important; background-color: #EC257C;">Designer: {{this}} &times;</a>
+            <span class="badge badge-pill badge-secondary"></span>
+        {{/each}}
+    {{/if}}
+
+    {{#if selected.categories}}
+        {{#each selected.categories}}
+            <a href="#" class="badge badge-secondary" onclick="removeCategory('{{this}}')" style="margin-top: 16px; margin-bottom: 8px; padding: 10px; color: white!important; background-color: #EC257C;">Category: {{this}} &times;</a>
+            <span class="badge badge-pill badge-secondary"></span>
+        {{/each}}
+    {{/if}}
+    
+    {{#if selected.materials}}
+        {{#each selected.materials}}
+            <a href="#" class="badge badge-secondary" onclick="removeMaterial('{{this}}')" style="margin-top: 16px; margin-bottom: 8px; padding: 10px; color: white!important; background-color: #EC257C;">Material: {{this}} &times;</a>
+            <span class="badge badge-pill badge-secondary"></span>
+        {{/each}}
+    {{/if}}
+
+    {{#if selected.prices}}
+        {{#each selected.prices}}
+            <a href="#" class="badge badge-secondary" onclick="removePriceRange('{{this}}')" style="margin-top: 16px; margin-bottom: 8px; padding: 10px; color: white!important; background-color: #EC257C;">Price Range: {{this}} &times;</a>
+            <span class="badge badge-pill badge-secondary"></span>
+        {{/each}}
+    {{/if}}
+
+    {{#if selected.sort}}
+        <a href="#" class="badge badge-secondary" onclick="removeSort('{{selected.sort}}')" style="margin-top: 16px; margin-bottom: 8px; padding: 10px; color: white!important; background-color: #EC257C;">Sorted By: {{selected.sort}} &times;</a>
+        <span class="badge badge-pill badge-secondary"></span>
+    {{/if}}
+
+    <div class="store-container row animated fadeIn">
+        {{#each listings}}
+        <div class="listing col-sm-4">
+            <div class="listing-card">
+                <a href="/store/listing/{{this._id}}"><img class="hvr-shadow" src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';"></a>
+                <a href="/store/designer/{{this.designer}}" class="listing-card-designer">{{this.designer}}</a>
+                <a href="/store/listing/{{this._id}}" class="listing-card-name hvr-sweep-to-top">{{this.name}}</a>
+                <p class="listing-card-price">${{price this.options}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <p class="pagination">
+        <a class="pagination__next" href="{{nextPageUrl}}">Next Page</a>
+    </p>
+
+    {{else}}
+    <div class="text-center">
+        <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">No listings found...</span>
+        </div>
+    </div>
+
+    <h1 class="display-4" style="text-align: center; margin-top: 12px;">No listings found</h1>
+    <p class="lead" style="text-align: center; color: black!important;">Click <a href="/store" style="color: #EC257C;">here</a> to return to the main store page</p>
+    {{/if}}
+</div>
+
+<script>
+    var elem = document.querySelector('.store-container');
+
+    var infScroll = new InfiniteScroll(elem, {
+        path : '.pagination__next',
+        append : '.listing',
+        history : false,
+        hideNav : '.pagination'
+    });
+</script>
+
+<script type='text/javascript'>
+    function addCategory(category) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl + '&category=' + category;
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function removeCategory(category) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl.replace('&category=' + category, '');
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function addDesigner(designer) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl + '&designer=' + designer;
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function removeDesigner(designer) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl.replace('&designer=' + designer, '');
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function addMaterial(material) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl + '&material=' + material;
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function removeMaterial(material) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl.replace('&material=' + material, '');
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function addPriceRange(range) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl + '&price=' + range;
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function removePriceRange(range) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl.replace('&price=' + range, '');
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function applySort(sort) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        let prePageUrl;
+        let newPageUrl;
+
+        if (currentPageUrl.includes('sort=')) {
+            const split = currentPageUrl.split('&');
+
+            for (var i = 0; i < split.length; i++) {
+                const str = split[i];
+
+                if (str.includes('sort=')) {
+                    split.splice(i, 1);
+                }
+            }
+
+            prePageUrl = split.join('&');
+        }
+
+        if (prePageUrl) {
+            newPageUrl = prePageUrl + '&sort=' + sort;
+        } else {
+            newPageUrl = currentPageUrl + '&sort=' + sort;
+        }
+
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+
+    function removeSort(sort) {
+        const parser = new DOMParser;
+        const currentPageUrl = parser.parseFromString('{{currentPageUrl}}', 'text/html').body.textContent;
+        const newPageUrl = currentPageUrl.replace('&sort=' + sort, '');
+        window.location = window.location.protocol + '//' + window.location.hostname + newPageUrl;
+    }
+</script>

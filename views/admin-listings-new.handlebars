@@ -1,0 +1,49 @@
+<div class="container-main">
+    <h1 style='text-align: center; color: black'>Create Listing</h1>
+    <h4 style='text-align: center'>Manually add listings or upload a .csv file</h4>
+
+    <br>
+
+    <form action="/admin/listings/create" method="POST">
+        <div class="row">
+            <div class="col-sm">
+                <label for="name">Item Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+            </div>
+
+            <div class="col-sm">
+                <label for="designer">Designer</label>
+                <select class="custom-select" name="designer" id="designer">
+                    {{#each designers}}
+                        <option value="{{this.name}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="col-sm">
+                <label for="type">Jewelry Type</label>
+                <select class="form-control" name="type" id="type">
+                    <option value="necklace">Necklace</option>
+                    <option value="ring">Ring</option>
+                    <option value="earring">Earrings</option>
+                    <option value="bracelet">Bracelet</option>
+                    <option value="pendant">Pendant</option>
+                </select>
+            </div>
+
+            <div class="col-sm">
+                <label for="collection">Collection</label>
+                <input type="text" class="form-control" name="collection" id="collection" placeholder="Collection">
+            </div>
+        </div>
+
+        <br>
+
+        <label for="description">Item Description</label>
+        <textarea class="form-control" id="description" name="description" placeholder="Item Description"></textarea>
+
+        <br>
+
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Create Listing</button>
+    </form>
+</div>

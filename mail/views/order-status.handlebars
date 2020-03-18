@@ -1,0 +1,26 @@
+<h1 style="text-align: center; font-size: 1.2rem;">Good News {{first_name}}!</h1>
+
+<br>
+
+<h1 style="text-align: center; font-size: 1.2rem;">The status of your order <a href="https://thejewelrybar.com/orders/{{order_id}}" style="color: #EC257C!important;">#{{transaction_id}}</a> has changed!</h1>
+
+<br>
+
+<h1 style="text-align: center; color: black!important; font-size: 1.2rem;">Your order status:</h1>
+<h1 style="text-align: center; color: black!important; font-size: 1.2rem;">{{status}}</h1>
+
+{{#if tracking}}
+<p style="text-align: center; color: black!important; font-size: 1.2rem;">Tracking Number: <a href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={{tracking}}" style="color: #EC257C!important;">#{{tracking}}</a></p>
+{{/if}}
+
+<br>
+
+<p style="color: black!important; text-align: center; font-size: 1rem;">
+    We hope you have a wonderful time using our website. If you have any questions or concerns please <a href="https://thejewelrybar.com/about/contact" style="color: #EC257C;">contact us</a>
+</p>
+
+<br>
+
+<p style="color: black!important; text-align: center; font-size: 0.9rem;">
+    ❤️ The Fine Jewelry Bar Team
+</p>

@@ -1,0 +1,34 @@
+<div class="container-main">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin" style="color: #EC257C;">Admin Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Users</li>
+        </ol>
+    </nav>
+
+    {{#if users}}
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{this.first_name}}</td>
+                <td>{{this.last_name}}</td>
+                <td><a href="mailto:{{this.email}}" style="color: #EC257C!important;">{{this.email}}</a></td>
+                <td><a href="/admin/users/{{this._id}}/edit" style="color: #EC257C!important;"><i class="fas fa-edit"></i></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <h1 style="text-align: center;">No users found...</h1>
+    {{/if}}
+</div>

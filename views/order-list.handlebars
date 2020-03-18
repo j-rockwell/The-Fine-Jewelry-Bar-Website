@@ -1,0 +1,47 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: #EC257C; font-size: 2.5rem;">Your Orders</h3>
+    
+    {{#if orders}}
+        <table class="table">
+            <thead>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Total Items</th>
+                <th scope="col"></th>
+            </thead>
+
+            <tbody>
+                {{#each orders}}
+                    <tr>
+                        <td>{{this.transaction}}</td>
+                        
+                        <td>
+                            {{#if (eq this.status 0)}}
+                                <span class="badge badge-primary">Awaiting Approval</span>
+                            {{/if}}
+
+                            {{#if (eq this.status 1)}}
+                                <span class="badge badge-warning">Awaiting Shipment</span>
+                            {{/if}}
+
+                            {{#if (eq this.status 2)}}
+                                <span class="badge badge-success">Shipped</span>
+                            {{/if}}
+
+                            {{#if (eq this.status 3)}}
+                                <span class="badge badge-info">Awaiting Special Order</span>
+                            {{/if}}
+                        </td>
+
+                        <td>{{this.items.length}}</td>
+
+                        <td><a href="/orders/{{this._id}}" style="color: #EC257C!important;">More Info</a></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <h3 class="display-4" style="text-align: center; font-size: 1.5rem; margin-top: 32px;">You haven't placed an order yet</h3>
+        <h5 class="display-4" style="text-align: center; font-size: 1rem;"><a href="/store" style="color: #EC257C!important;">Click here</a> to start shopping!</h5>
+    {{/if}}
+</div>

@@ -1,0 +1,56 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: black; font-size: 2.5rem; margin-bottom: 32px;">Register an account</h3>
+
+    <div class="row">
+        <div class="col"></div>
+
+        <div class="col-8">
+            <form action="/users/register" method="POST">
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="inputFirstName">First Name</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" name="firstName" required>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="inputLastName">Last Name</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" name="lastName" required>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="form-group">
+                    <label for="inputEmail">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                            <small id="inputPassword" class="form-text text-muted">Password must be 6 characters or more</small>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="inputPassword2">Confirm Password</label>
+                            <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Re-enter Password" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="inputNewsletter" name="newsletter">
+                    <label class="form-check-label" for="exampleCheck1"><h5> I would like to receive a monthly newsletter from The Fine Jewelry Bar</h5></label>
+                </div>
+
+                <button type="submit" name="registerButton" value="register" class="btn btn-secondary btn-sm btn-block" style="display: block; margin: 0 auto; max-width: 120px;">Create Account</button>
+            </form>
+        </div>
+
+        <div class="col"></div>
+    </div>
+</div>

@@ -1,0 +1,197 @@
+<!-- /store/listing/ -->
+<div class="container-main">
+    <div class="row">
+        <div class="col-sm-8 my-auto">
+            <img style="display: block; margin: 0 auto; max-width: 80%;" id="productImage" src="/images/product/{{option._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 100%;">
+        </div>
+
+        <div class="col-sm-4">
+            <h3 class="display-4" style="color: #EC257C; font-size: 2.5rem;">{{listing.name}}</h3>
+            <p style="color: black!important;">By <a href="/store/designer/{{listing.designer}}" style="color: #EC257C;">{{listing.designer}}</a></p>
+
+            <br>
+
+            <p style="color: black!important;">{{listing.description}}</p>
+
+            <br>
+
+            <h3>${{formatPrice price}}</h3>
+            <h5 style="color: black!important; margin-bottom: 8px;">Selected: {{option.identifier}}</h5>
+
+            <br>
+
+            <form action="/cart/add/{{listing._id}}/{{option._id}}" method="POST">
+                {{#if option.sizes}}
+                <label for="size">Available Sizes ({{option.sizes.length}})</label>
+                <select class="form-control" id="size" name="size">
+                    {{#each option.sizes}}
+                        {{#if @first}}
+                        <option value={{this}} selected>{{this}}</option>
+                        {{else}}
+                        <option value={{this}}>{{this}}</option>
+                        {{/if}}
+                    {{/each}}
+                </select>
+                <br>
+                {{/if}}
+
+                {{#greaterThan listing.options.length 2}}
+                <label for="options">Available Options ({{listing.options.length}})</label>
+                <select class="form-control" id="options" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                    <option>{{option.identifier}}, {{option.metal}}{{#if option.gemstone}}, {{option.gemstone}}{{/if}}</option>
+
+                    {{#each listing.options}}
+                        {{#greaterThan this.quantity 0}}
+                            {{#notEquals @root.option._id this._id}}
+                            <option value="/store/listing/{{@root.listing._id}}/{{this._id}}">{{this.identifier}}, {{this.metal}}{{#if this.gemstone}}, {{this.gemstone}}{{/if}}</option>
+                            {{/notEquals}}
+                        {{/greaterThan}}
+                    {{/each}}
+                </select>
+                {{/greaterThan}}
+
+                <br>
+
+                {{#if user}}
+                <button type="submit" class="add-cart-btn hvr-grow">ADD TO CART</button>
+                {{else}}
+                <button type="button" class="add-cart-btn hvr-grow" data-toggle="modal" data-target="#signupModal">ADD TO CART</button>
+                {{/if}}
+            </form>
+
+            <br>
+        </div>
+    </div>
+
+    <hr>
+
+    <h5>Product Specifications</h5>
+    <ul>
+        <li><p style="color: black!important; margin-bottom: 0;">SKU: {{option.sku}}</p></li>
+        {{#if option.metal}}<li><p style="color: black!important; margin-bottom: 0;">Metal: {{option.metal}}</p></li>{{/if}}
+        {{#if option.gemstone}}<li><p style="color: black!important; margin-bottom: 0;">Gemstone: {{option.gemstone}}</p></li>{{/if}}
+        {{#if option.size}}<li><p style="color: black!important; margin-bottom: 0;">Size/Length: {{option.size}}</p></li>{{/if}}
+    </ul>
+
+    <hr>
+
+    {{#if similarListings.length}}
+        <h5>More from <a href="/store/designer/{{listing.designer}}" style="color: #EC257C;">{{listing.designer}}</a></h5>
+
+        <div class="row">
+            {{#each similarListings}}
+            <div class="col-sm">
+                <div class="listing-card">
+                    <a href="/store/listing/{{this._id}}"><img class="hvr-shadow" src="/images/product/{{this._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';"></a>
+                    <a href="/store/designer/{{this.designer}}" class="listing-card-designer">{{this.designer}}</a>
+                    <a href="/store/listing/{{this._id}}" class="listing-card-name hvr-sweep-to-top">{{this.name}}</a>
+                    <p class="listing-card-price">${{price this.options}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>
+
+<!-- CREATE ACCOUNT MODAL -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="float-right" style="margin-top: 10px; margin-right: 15px;">&times;</span>
+            </button>
+
+            <div class="modal-body">
+                <h5 style="text-align: center;">Create an account to add items to your cart</h5>
+
+                <p style="color:black!important; text-align: center;">Already have an account? <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" style="color:#EC257C;">Click here</a> to sign in</p>
+
+                <div class="col-4 mx-auto text-center">
+                    <img src="/images/product/{{option._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 100%;">
+                </div>
+
+                <br>
+
+                <form action="/users/register/{{listing._id}}/{{option._id}}" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" name="firstName" required>
+                        </div>
+
+                        <div class="col">
+                            <label for="inputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label for="inputEmail">Email Address</label>
+                        <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                        <small id="inputPassword" class="form-text text-muted">Password must be 6 characters or more</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword2">Confirm Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Re-enter Password" required>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="inputNewsletter" name="newsletter">
+                        <label class="form-check-label" for="exampleCheck1"><h5> I would like to receive a monthly newsletter from The Fine Jewelry Bar</h5></label>
+                    </div>
+
+                    <div class="col-4 mx-auto text-center">
+                        <button type="submit" class="btn btn-secondary">Create Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="float-right" style="margin-top: 10px; margin-right: 15px;">&times;</span>
+            </button>
+
+            <div class="modal-body">
+                <h5 style="text-align: center;">Sign in to your account to add items to your cart</h5>
+
+                <p style="color:black!important; text-align: center;">Don't have an account? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal" style="color:#EC257C;">Click here</a> to create a new one for free</p>
+
+                <div class="col-4 mx-auto text-center">
+                    <img src="/images/product/{{option._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 100%;">
+                </div>
+
+                <br>
+
+                <form action="/users/login/{{listing._id}}/{{option._id}}" method="POST">
+                    <div class="form-group">
+                        <label for="inputEmail">Email Address</label>
+                        <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="col-4 mx-auto text-center">
+                        <button type="submit" class="btn btn-secondary">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

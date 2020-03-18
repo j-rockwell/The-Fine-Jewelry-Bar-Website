@@ -1,0 +1,79 @@
+<div class="container-main">
+    <div class="todd-reed-invite" style="background-color: #231f20; padding-top: 32px; padding-bottom: 32px;">
+        <p style="text-align: center; font-size: 1.25rem; letter-spacing: 4px; margin-bottom: 24px;">YOU'RE INVITED</p>
+        <img src="/images/todd-reed-logo-white.png" style="text-align: center; display: block; margin-left: auto; margin-right: auto; max-width: 50%; margin-bottom: 32px;">
+        <p style="padding-top: 5px; padding-bottom: 5px; text-align: center; background-color: #b89266; width: 100%; letter-spacing: 16px; font-size: 1rem; margin-bottom: 32px;">JEWELER EXTRAORDINAIRE</p>
+        <p style="font-size: 0.95rem; text-align: center; letter-spacing: 2px; margin-bottom: 24px;">IS COMING TO THE FINE JEWELRY BAR</p>
+        <p style="font-size: 0.95rem; text-align: center; letter-spacing: 2px; margin-bottom: 24px;">TRUNK SHOW JANUARY 29 - FEBRUARY 1</p>
+        <p style="font-size: 0.95rem; text-align: center; letter-spacing: 2px; margin-bottom: 24px;">TODD REED IN PERSON JANUARY 31</p>
+
+        <!-- mailto:todd@thejewelrybar.com?subject=Todd Reed Trunk Show Appointment&body=Thank you for reaching out for our Todd Reed event. -->
+        <div class="dropdown">
+            <a class="todd-reed-appointment-btn dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BOOK AN APPOINTMENT</a>
+
+            <div id="appointment-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a id="appointment-option" class="dropdown-item" href="mailto:todd@thejewelrybar.com?subject=Todd Reed Trunk Show Appointment&body=Thank you for reaching out for our Todd Reed event.">Email Us <i class="far fa-envelope"></i></a>
+                <a id="appointment-option" class="dropdown-item" href="tel:1-760-862-1809">Call Us <i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md">
+            <img src="/images/todd-reed-description.png" style="max-width: 100%;">
+        </div>
+
+        <br>
+
+        <div class="col-md">
+            <img src="/images/todd-reed-jewelry.png" style="max-width: 100%;">
+        </div>
+    </div>
+
+    <h3 style="text-align: center; border-bottom: 4px solid #EC257C; max-width: 500px; margin: 0 auto; padding-bottom: 6px; margin-top: 48px; margin-bottom: 32px;">Browse Todd Reed's Lookbooks</h3>
+
+    <iframe frameborder='0' width='90%' height='600px' src="https://online.anyflip.com/yqdi/kheb/index.html" type='text/html' allowfullscreen='true' scrolling='no' marginwidth='0' marginheight='0' style="display: block; margin: 0 auto;"></iframe>
+    <p style="text-align: center; color: black!important; font-size: 1.25rem;">Womens Lookbook</p>
+
+    <iframe frameborder='0' width='90%' height='600px' src="https://online.anyflip.com/yqdi/kjnh/index.html" type='text/html' allowfullscreen='true' scrolling='no' marginwidth='0' marginheight='0' style="display: block; margin: 0 auto;"></iframe>
+    <p style="text-align: center; color: black!important; font-size: 1.25rem;">Mens Lookbook</p>
+
+    <div class="row">
+        <div class="col-md">
+            <img src="/images/todd-reed-jewelry-1.png" style="width: 100%;">
+        </div>
+
+        <div class="col-md">
+            <img src="/images/todd-reed-jewelry-2.png" style="width: 100%;">
+        </div>
+
+        <div class="col-md">
+            <img src="/images/todd-reed-jewelry-3.png" style="width: 100%;">
+        </div>
+
+        <div class="col-md">
+            <img src="/images/todd-reed-jewelry-4.png" style="width: 100%;">
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown() {
+        document.getElementById("appointment-dropdown").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.todd-reed-appointment-btn')) {
+            var dropdowns = document.getElementsByClassName("appointment-option");
+            var i;
+
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

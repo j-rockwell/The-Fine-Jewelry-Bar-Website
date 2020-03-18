@@ -1,0 +1,88 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: #EC257C; font-size: 2.5rem; margin-bottom: 16px;">Your Cart</h3>
+
+    {{#if results.length}}
+    <ul class="list-unstyled">
+        {{#each results}}
+        <li class="media" style="margin-bottom: 32px;">
+            <a class="align-self-center mr-3" href="/store/listing/{{this.listing._id}}/{{this.option._id}}"><img src="/images/product/{{this.option._id}}.png" onerror="this.src = '/images/item-listing-placeholder.png';" style="max-width: 150px;"></a>
+
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p style="color: black!important; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0; padding-bottom: 0;">{{this.listing.designer}}</p>
+                        <p style="color: black!important; font-size: 1.0rem">{{this.listing.name}}</p>
+                        {{#if this.option.metal}}<p style="color: black!important; margin-bottom: 0; padding-bottom: 0;">Metal: {{this.option.metal}}</p>{{/if}}
+                        {{#if this.option.gemstone}}<p style="color: black!important; margin-bottom: 0; padding-bottom: 0;">Gemstone: {{this.option.gemstone}}</p>{{/if}}
+                        {{#if this.size}}<p style="color: black!important; margin-bottom: 0; padding-bottom: 0;">Size: {{this.size}}</p>{{/if}}
+
+                        {{#if this.size}}
+                        <form action="/cart/delete/{{this.listing._id}}/{{this.option._id}}/{{this.size}}" method="POST">
+                            <button type="submit" class="btn btn-secondary btn-sm" style="margin-top: 16px;"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                        {{else}}
+                        <form action="/cart/delete/{{this.listing._id}}/{{this.option._id}}" method="POST">
+                            <button type="submit" class="btn btn-secondary btn-sm" style="margin-top: 16px;"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="float-right"><p style="color: black!important; font-size: 0.85rem; padding-bottom: 0; margin-bottom: 0;">${{formatPrice this.option.price}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        {{/each}}
+
+        <hr>
+
+        <div class="d-none d-md-block">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p style="color: black!important;">Questions or concerns? <a href="/about/contact" style="color: #EC257C;">Contact Us.</a></p>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <p style="color: black!important">Subtotal:</p>
+                            <p style="color: black!important">CA Taxes (If applies):</p>
+                            <p style="color: black!important">Shipping:</p>
+                            <p style="color: black!important">Estimated Total:</p>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <p style="color: black!important; display: inline; float: right;">${{calcSubtotal options}}</p>
+                            <p style="color: black!important; display: inline; float: right;">${{calcTax options}}</p>
+                            <p style="color: black!important; display: inline; float: right;"><b>Free</b></p>
+                            <p style="color: black!important; display: inline; float: right;">${{calcTotal options}}</p>
+                        </div>
+                    </div>
+
+                    <a href="/cart/checkout"><button type="submit" class="btn btn-secondary btn-lg btn-block">Check out</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-md-none">
+            <p style="color: black!important; text-align: center;">Subtotal: ${{calcSubtotal options}}</p>
+            <p style="color: black!important; text-align: center;">CA Taxes (If applies): ${{calcTax options}}</p>
+            <p style="color: black!important; text-align: center;">Shipping: <b>Free</b></p>
+            <p style="color: black!important; text-align: center;">Estimated Total: ${{calcTotal options}}</p>
+            
+            <hr>
+            
+            <a href="/cart/checkout"><button type="submit" class="btn btn-secondary btn-lg btn-block">Check out</button></a>
+        </div>
+    </ul>
+    {{else}}
+    <div class="text-center">
+        <h1><i class="fas fa-shopping-bag"></i></h1>
+    </div>
+
+    <h1 class="display-4" style="text-align: center;">Your cart is empty</h1>
+    <p class="lead" style="text-align: center; color: black!important;">Click <a href="/store" style="color: #EC257C;">here</a> to start shopping!</p>
+    {{/if}}
+</div>

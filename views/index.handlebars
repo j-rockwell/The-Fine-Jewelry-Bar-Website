@@ -1,0 +1,118 @@
+<div class="container-main">
+    <div class="row">
+        <div class="col-sm-8">
+            <img class="animated fadeIn" src="/images/experimental/800x800.png" style="max-width: 100%; margin-bottom: 32px;">
+
+            <div class="row">
+                <div class="col-sm">
+                    <img class="animated fadeIn" src="/images/experimental/800x800.png" style="max-width: 100%; margin-bottom: 32px;">
+                </div>
+
+                <div class="col-sm">
+                    <img class="animated fadeIn" src="/images/experimental/800x800.png" style="max-width: 100%; margin-bottom: 32px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div id="square" class="square animated fadeIn">
+                <div class="square-content">
+                    <p>NOW SERVING</p>
+
+                    <div class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+                        <div class="carousel-inner">
+                            {{#each designers}}
+                                {{#if @first}}
+                                <div class="carousel-item active">
+                                    <a class="hvr-bounce-in square-designer-name" href="/store/designer/{{this.name}}">{{this.name}}</a>
+                                </div>
+                                {{else}}
+                                <div class="carousel-item">
+                                    <a class="hvr-bounce-in square-designer-name" href="/store/designer/{{this.name}}">{{this.name}}</a>
+                                </div>
+                                {{/if}}
+                        {{/each}}
+                        </div>
+
+                        <a class="square-explore-designer" href="/designers">EXPLORE {{designers.length}} DESIGNERS</a>
+                    </div>
+                </div>
+            </div>
+
+            <img class="animated fadeIn" src="/images/experimental/800x800.png" style="max-width: 100%; margin-bottom: 32px;">
+
+            <img class="animated fadeIn" src="/images/experimental/800x800.png" style="max-width: 100%; margin-bottom: 32px;">
+        </div>
+    </div>
+
+    <h1 class="animated fadeIn delay-1s" style="text-align: center; font-family: 'Cinzel', serif;">FOLLOW US ON INSTAGRAM</h1>
+    <h2 class="animated fadeIn delay-1s" style="text-align: center; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px;"><a href="#" style="color: #EC257C!important;">@the.jewelry.bar</a> & <a href="#"  style="color: #EC257C!important;">@the.elephantbar</a></h2>
+
+    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+    <iframe class="animated fadeIn delay-3s" src="https://cdn.lightwidget.com/widgets/5d0fc7f8d61c56f08f4e67e9bcb1fd8b.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden; margin-bottom: 10px;"></iframe>
+</div>
+
+<div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="saleModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 0; border: 1px solid #EC257C;">
+            <div class="modal-body">
+                <img src="/images/logo-large-noelpaseo.png" style="width: 100%;">
+                <img src="/images/sale-popup-artwork.png" style="width: 100%; margin-bottom: 8px;">
+
+                <h4 class="display-4" style="text-align: center; color: black; font-size: 2rem;">LOOK WHAT WE'VE GOT!</h4>
+                <h4 class="display-4" style="text-align: center; color:black!important; font-size: 1.25rem;">Use code <b style="color: #EC257C;">WELCOME</b> and save 15% on your purchase!</h4>
+                
+                <hr>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <a class="btn btn-outline-light btn-sm btn-block" href="/store" role="button" style="color: #EC257C; border-color: #EC257C; margin-bottom: 12px;">SHOP NOW</a>
+                    </div>
+                </div>
+
+                {{#unless user}}
+                <div class="row">
+                    <div class="col text-center">
+                        <a class="btn btn-outline-secondary btn-sm btn-block" href="/users/register">CREATE ACCOUNT</a>
+                    </div>
+
+                    <div class="col text-center">
+                        <a class="btn btn-outline-secondary btn-sm btn-block" href="/users/login">SIGN IN</a>
+                    </div>
+                </div> 
+                {{/unless}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const ca = decodedCookie.split(';');
+        var hasViewed = false;
+
+        console.log(ca);
+
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+
+            if (c.includes('hasSeenWelcomeSale=true')) {
+                hasViewed = true;
+                break;
+            }
+        }
+
+        if (!hasViewed) {
+            setTimeout(function() {
+                const date = new Date();
+
+                date.setTime(+ date + 86400000);
+
+                document.cookie = "hasSeenWelcomeSale=true; expires=" + date.toGMTString() + ";";
+
+                $('#saleModal').modal('show');
+            }, 3000);
+        }
+    });
+</script>

@@ -1,0 +1,130 @@
+<div class="container-main">
+    <h3 class="display-4" style="text-align: center; color: black; font-size: 2.5rem;">Discount Codes</h3>
+    <p style="color: black!important; text-align: center;"><a href="#" style="color: #EC257C; font-weight: bold;" data-toggle="modal" data-target="#createModal">Click here</a> to create a new discount code</p>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Percent Discounted</th>
+                <th scope="col">Dollars Discounted</th>
+                <th scope="col">Remaining Uses</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Date Expires</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each codes}}
+                <tr>
+                    <td><b>{{this.code}}</b></td>
+                    <td>{{this.percent_discounted}}%</td>
+                    <td>${{this.dollar_discounted}}</td>
+                    <td>{{this.remaining_uses}}</td>
+                    <td>{{this.created}}</td>
+                    <td>{{this.expire}}</td>
+                    <td><a href="/admin/discounts/delete/{{this._id}}"><i class="far fa-trash-alt text-danger"></i></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Create a new discount code</h5>
+        
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="/admin/discounts/create" method="POST">
+                    <div class="form-group">
+                        <label for="code">Discount Code</label>
+                        <input id="code" name="code" type="text" class="form-control" aria-label="Code" required>
+                        <small id="emailHelp" class="form-text text-muted">This is the code that will be entered at checkout</small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="minCartValue">Min. Cart Value</label>
+                                <input id="minCartValue" name="minCartValue" type="number" class="form-control" aria-label="Minimum Cart Value">
+                                <small id="emailHelp" class="form-text text-muted">Minimum $ value a cart must have for this code to take effect</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="totalUses">Total Uses</label>
+                                <input id="totalUses" name="totalUses" type="number" class="form-control" aria-label="Total Uses">
+                                <small id="emailHelp" class="form-text text-muted"># of times this code can be used before it expires</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="percentDiscounted">Percent Discounted</label>
+                                <input id="percentDiscounted" name="percentDiscounted" type="number" step="any" class="form-control" aria-label="Percent Discounted Value">
+                                <small id="emailHelp" class="form-text text-muted">Percent discount, leave blank to not have an effect</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="dollarDiscounted">Dollar Discounted</label>
+                                <input id="dollarDiscounted" name="dollarDiscounted" type="number" class="form-control" aria-label="Dollar Discounted Value">
+                                <small id="emailHelp" class="form-text text-muted">Dollar discount, leave blank to not have an effect</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="expireDays">Expire Days</label>
+                                <input id="expireDays" name="expireDays" type="number" class="form-control" aria-label="Expire Days">
+                                <small id="emailHelp" class="form-text text-muted">e.g 1 = 24 hours, 2 = 48 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="expireHours">Expire Hours</label>
+                                <input id="expireHours" name="expireHours" type="number" class="form-control" aria-label="Expire Hours">
+                                <small id="emailHelp" class="form-text text-muted">e.g 6 = 6 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="expireMinutes">Expire Minutes</label>
+                                <input id="expireMinutes" name="expireMinutes" type="number" class="form-control" aria-label="Expire Minutes">
+                                <small id="emailHelp" class="form-text text-muted">e.g 30 = 30 minutes</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col"></div>
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Create</button>
+                        </div>
+
+                        <div class="col"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
