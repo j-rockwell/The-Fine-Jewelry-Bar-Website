@@ -1,4 +1,8 @@
-# The Fine Jewelry Bar Website
+# The Fine Jewelry Bar Website  
+  
+![Website Preview](https://i.imgur.com/vnKcU9I.png)  
+  
+
 This website is powered by Node.js and uses the Express.js framework accompanied by a Handlebars templating system to create an efficient and responsive e-commerce platform for high-volume jewelry sales.
 
 **NOTE**  
